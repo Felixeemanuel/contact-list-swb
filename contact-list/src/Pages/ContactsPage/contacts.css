@@ -1,0 +1,54 @@
+.contacts-wrapper {
+    padding-inline: 1rem;
+}
+
+.upper-div {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.upper-div h1 {
+    font-weight: 600;
+    font-size: 1.7rem;
+}
+
+.upper-div div:nth-of-type(1){
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search-div input {
+    width: 100%;
+    padding: .5rem;
+    border-radius: .7rem;
+    outline: none;
+    border: 0;
+    padding-left: 2rem;
+    background-color: #D9D9D9;
+}
+
+.search-div {
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+    top: 23%;
+    left: 2%;
+    font-size: larger;
+}
+
+.plus-icon {
+    font-size: 1.5rem;
+    background-color: #529F83;
+    border-radius: 50%;
+}
+
+.contacts-list {
+    margin-top: 3rem;
+}
+

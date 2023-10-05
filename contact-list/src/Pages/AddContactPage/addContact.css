@@ -1,0 +1,33 @@
+.add-contact-upper-div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 10vh;
+    padding-inline: 1rem;
+}
+
+.add-contact-done-btn {
+    text-decoration: none;
+}
+
+.add-contact-upper-div h1 {
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.add-contact-link {
+    display: flex;
+    gap: .5rem;
+    text-decoration: none;
+    align-items: center;
+    cursor: pointer;
+}
+
+.add-contact-link p {
+    color: #529F83;
+}
+
+.back-icon {
+    font-size: 1.4rem;
+    color: black;
+}

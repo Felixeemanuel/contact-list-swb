@@ -1,0 +1,45 @@
+.add-contact-info-section {
+    display: flex;
+    flex-direction: column;
+    background-color: #D9D9D9;
+    padding: .5rem 1rem;
+}
+
+.add-contact-input {
+    padding-block: .5rem;
+    border: 0;
+    border-bottom: 1px solid #9C9C9C;
+    background-color: #D9D9D9;
+}
+
+.add-contact-input:last-of-type {
+    border-bottom: 0;
+}
+
+.add-contact-form {
+    margin-top: 3rem;
+}
+
+.input-number-div {
+    margin-top: 3rem;
+    position: relative;
+}
+
+.input-number-div input {
+    background-color: #D9D9D9;
+    width: 100%;
+    border: 0;
+    padding-block: .5rem;
+    padding-left: 3rem;
+}
+
+.add-contact-plus-icon-div {
+    padding-left: 1rem;
+}
+
+.add-contact-plus-icon {
+    position: absolute;
+    top: 30%;
+    background-color: #529F83;
+    border-radius: 50%;
+}
