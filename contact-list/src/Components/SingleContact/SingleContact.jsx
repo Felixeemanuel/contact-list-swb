@@ -7,7 +7,7 @@ const SingleContact = ({contact}) => {
   return (
     <Link to={`/${contact.id}`} className='singleContact-link'>
       <div className='singleContact'>
-          <p>{contact && contact.firstName}</p>
+          <p>{contact && contact.firstName + ' ' + contact.lastName}</p>
       </div>
     </Link>
   )

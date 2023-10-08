@@ -10,7 +10,7 @@ function App() {
     const router = createBrowserRouter([
       {
         path: '/',
-        element: <Contacts />
+        element: <Contacts />,
       },
       {
         path: '/add-contact',

@@ -1,64 +1,50 @@
-import React, { useEffect, useState } from 'react'
-import { AiOutlinePlus } from 'react-icons/ai'
-import { BiSearch } from 'react-icons/bi'
-import SingleContact from '../../Components/SingleContact/SingleContact'
-import { Link } from 'react-router-dom'
-import './contacts.css'
+import React, { useState } from 'react';
+import { AiOutlinePlus } from 'react-icons/ai';
+import { BiSearch } from 'react-icons/bi';
+import SingleContact from '../../Components/SingleContact/SingleContact';
+import { Link } from 'react-router-dom';
+import { useContacts } from '../../Context/ContactsContext';
+import './contacts.css';
 
 const Contacts = () => {
+  const { contacts } = useContacts();
+  const [searchTerm, setSearchTerm] = useState('');
 
-  const [contacts, setContacts] = useState([])
-
-  const getContacts = async () => {
-    fetch('contacts.json',
-    {
-      headers : {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    }
-    )
-    .then(function(response){
-      return response.json();
-    })
-    .then(function(myJson) {
-      setContacts(myJson)
-    })
-  }
-
-  useEffect(() => {
-    getContacts()
-  }, [])
+  const filteredContacts = contacts.filter((contact) => {
+    const fullName = `${contact.firstName} ${contact.lastName}`.toLowerCase();
+    return fullName.includes(searchTerm.toLowerCase());
+  });
 
   return (
     <>
-    <div className="contacts-wrapper">
-      <div className="upper-div">
-        <div>
-          <h1>Contacts</h1>
-          <Link to={'/add-contact'}>
-            <AiOutlinePlus className='plus-icon' />
-          </Link>
-        </div>
-        <div className="search-div">
-          <input type="text" placeholder= 'Search'/>
-          <div className='search-icon'>
-            <BiSearch />
+      <div className="contacts-wrapper">
+        <div className="upper-div">
+          <div>
+            <h1>Contacts</h1>
+            <Link to={'/add-contact'} contacts={contacts}>
+              <AiOutlinePlus className='plus-icon' />
+            </Link>
+          </div>
+          <div className="search-div">
+            <input
+              type="text"
+              placeholder="Search"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+            <div className='search-icon'>
+              <BiSearch />
+            </div>
           </div>
         </div>
+        <div className="contacts-list">
+          {filteredContacts.map((contact) => (
+            <SingleContact key={contact.id} contact={contact} />
+          ))}
+        </div>
       </div>
-      <div className="contacts-list">
-        {
-          contacts && contacts.map((contact) => {
-            return (
-              <SingleContact contacts={contacts} contact={contact} key={contact.id}/>
-            )
-          })
-        }
-      </div>
-    </div>
     </>
-  )
-}
+  );
+};
 
-export default Contacts
+export default Contacts;
