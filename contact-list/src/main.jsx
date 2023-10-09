@@ -7,6 +7,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <ContactsProvider>
     <React.StrictMode>
       <App />
-    </React.StrictMode>
+  </React.StrictMode>
   </ContactsProvider>
 )

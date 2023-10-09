@@ -9,6 +9,9 @@ const AddContactForm = () => {
   const navigate = useNavigate()
   const { contacts, setContacts, addContact } = useContacts()
 
+  const [filled, setFilled] = useState(false)
+
+
   const newId = contacts.length + 1
 
   const [data, setData] = useState({
@@ -21,16 +24,14 @@ const AddContactForm = () => {
 
     const handleSubmit = async (e) => {
       e.preventDefault();
-  
-      // Call the addContact function to add the new contact
+
       addContact(data);
   
-      // Reset the form data
       setData({
         id: newId,
         firstName: '',
-        lastName: '',
-        company: '',
+        lastName: '' && null,
+        company: '' && null,
         phoneNumber: '',
       });
       navigate('/')
@@ -47,6 +48,9 @@ const AddContactForm = () => {
   };
 
   const [open, setOpen] = useState(false);
+
+  const isFormValid = data.firstName.trim() !== '' && data.phoneNumber.trim() !== '';
+
 
   return (
     <form className="add-contact-form" onSubmit={(e) => handleSubmit(e)}>
@@ -90,7 +94,11 @@ const AddContactForm = () => {
           <AiOutlinePlus className="add-contact-plus-icon" />
         </div>
       </div>
-      <button type="submit">Add</button>
+      <button
+        className={`contact-form-submit ${isFormValid ? '' : 'disabled'}`}
+        type="submit"
+        disabled={!isFormValid}
+      >Done</button>
     </form>
   );
 };

@@ -4,6 +4,14 @@
     transition: 100ms ease-in-out;
     padding-left: .1rem;
     text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.singleContact p:last-of-type {
+    color: #529F83;
+    font-size: .9rem;
 }
 
 

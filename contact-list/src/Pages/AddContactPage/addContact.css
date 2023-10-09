@@ -6,6 +6,11 @@
     padding-inline: 1rem;
 }
 
+.add-contact-wrapper {
+    max-width: 50rem;
+    margin: auto;
+}
+
 .add-contact-done-btn {
     text-decoration: none;
 }
@@ -21,6 +26,11 @@
     text-decoration: none;
     align-items: center;
     cursor: pointer;
+
+}
+
+.add-contact-link:last-child {
+    margin-right: 2rem;
 }
 
 .add-contact-link p {

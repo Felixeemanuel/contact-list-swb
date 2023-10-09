@@ -7,6 +7,8 @@
 
 .contact-wrapper {
     padding-inline: 1rem;
+    max-width: 50rem;
+    margin: auto;
 }
 
 .contact-upper-back {
@@ -57,6 +59,7 @@
     justify-content: space-between;
     width: 100%;
     gap: 1rem;
+    max-width: 25rem;
 }
 
 .contact-box {
@@ -125,6 +128,25 @@
 .contact-name {
     font-weight: 500;
     font-size: 1.8rem;
+}
+
+.notFound {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 92vh;
+    gap: 2rem;
+}
+
+.goBack {
+    padding: .5rem 2rem;
+    border: 0;
+    border-radius: .5rem;
+    background-color: #529F83;
+    cursor: pointer;
+    color: white;
+
 }
 
 

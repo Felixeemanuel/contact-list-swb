@@ -11,6 +11,7 @@ export function useContacts() {
 export function ContactsProvider({ children }) {
 
     const [contacts, setContacts] = useState([])
+    localStorage.setItem('contacts', JSON.stringify(contacts))
 
     useEffect(() => {
         fetch('contacts.json',

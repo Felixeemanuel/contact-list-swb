@@ -1,5 +1,7 @@
 .contacts-wrapper {
     padding-inline: 1rem;
+    max-width: 50rem;
+    margin: auto;
 }
 
 .upper-div {

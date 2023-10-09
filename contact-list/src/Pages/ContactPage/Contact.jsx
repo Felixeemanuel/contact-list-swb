@@ -61,7 +61,14 @@ const Contact = () => {
 
 
   if (!contact) {
-    return <div>Could not find contact</div>
+    return (
+      <>
+      <div className='notFound'>
+      <div >Could not find contact</div>
+      <Link style={{ textDecoration: 'none'}} className='goBack' to={'/'}>Go back</Link>
+      </div>
+      </>
+    )
   }
 
   return (
