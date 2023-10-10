@@ -1,41 +1,41 @@
 import React, { useState } from 'react';
 import './addContactForm.css';
 import { AiOutlinePlus } from 'react-icons/ai';
-import { useContacts } from '../../Context/ContactsContext'
 import { useNavigate } from 'react-router-dom';
+import { addDoc, collection } from 'firebase/firestore'
+import { db } from '../DB/config';
 
 const AddContactForm = () => {
 
   const navigate = useNavigate()
-  const { contacts, setContacts, addContact } = useContacts()
-
-  const [filled, setFilled] = useState(false)
-
-
-  const newId = contacts.length + 1
 
   const [data, setData] = useState({
-    id: newId,
     firstName: '',
     lastName: '',
     company: '',
     phoneNumber: '',
   });
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-
-      addContact(data);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
   
-      setData({
-        id: newId,
-        firstName: '',
-        lastName: '' && null,
-        company: '' && null,
-        phoneNumber: '',
-      });
-      navigate('/')
-    };
+    try {
+      const newContact = {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        company: data.company,
+        phoneNumber: data.phoneNumber,
+      };
+  
+      const contactsRef = await addDoc(collection(db, 'contacts'), newContact);
+  
+      console.log('Contact added successfully with ID: ', contactsRef.id);
+      navigate('/');
+    } catch (err) {
+      console.error('Error adding contact: ', err);
+    }
+  };
+  
 
 
 
@@ -47,7 +47,6 @@ const AddContactForm = () => {
     }));
   };
 
-  const [open, setOpen] = useState(false);
 
   const isFormValid = data.firstName.trim() !== '' && data.phoneNumber.trim() !== '';
 

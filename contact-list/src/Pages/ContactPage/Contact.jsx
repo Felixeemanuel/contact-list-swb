@@ -4,63 +4,58 @@ import { IoChevronBackOutline } from 'react-icons/io5'
 import { AiFillMessage, AiFillPhone } from 'react-icons/ai'
 import { BsFillCameraVideoFill } from 'react-icons/bs'
 import './contact.css'
+import { doc, getDoc } from 'firebase/firestore'
+import { db } from '../../Components/DB/config'
 
 const Contact = () => {
 
   const { id } = useParams();
 
-  const [contact, setContact] = useState(null);
+  const [contactDetails, setContactDetails] = useState({});
 
-  const getContact = async (id) => {
-    try {
-      const response = await fetch('contacts.json', {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        }
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data = await response.json();
-      const foundContact = data.find((contact) => contact.id === parseInt(id, 10));
-
-      if (foundContact) {
-        setContact(foundContact);
-      } else {
-        console.log('Contact not found');
-      }
-    } catch (error) {
-      console.error('Error fetching contact:', error);
-    }
-  };
+  const docRef = doc(db, 'contacts', id)
 
   useEffect(() => {
-    getContact(id);
-  }, [id]); 
+    const getContactDetails = async () => {
+      const docSnap = await getDoc(docRef)
+
+      if(docSnap.exists()) {
+        const contactData = {
+          id: docSnap.id,
+          firstName: docSnap.data().firstName,
+          lastName: docSnap.data().lastName,
+          company: docSnap.data().company,
+          phoneNumber: docSnap.data().phoneNumber
+        }
+
+        setContactDetails(contactData)
+      } else {
+        console.log('Contact not found')
+      }
+    }
+    getContactDetails()
+  }, [id])
 
   let arr = [];
-  if (contact && contact.firstName) {
-    arr = contact.firstName.split('');
+  if (contactDetails && contactDetails.firstName) {
+    arr = contactDetails.firstName.split('');
   }
 
   let phoneNumber = [];
-  if (contact && contact.phoneNumber) {
-    phoneNumber = contact.phoneNumber.split('');
+  if (contactDetails && contactDetails.phoneNumber) {
+    phoneNumber = contactDetails.phoneNumber.split('');
   }
 
   const formatPhoneNumber = () => {
-    const numericPhoneNumber = contact && contact.phoneNumber ? contact.phoneNumber.replace(/\D/g, '') : '';
+    const numericPhoneNumber = contactDetails && contactDetails.phoneNumber ? contactDetails.phoneNumber.replace(/\D/g, '') : '';
     const formattedPhoneNumber = numericPhoneNumber.replace(/(\d{3})(\d{3})(\d{2})(\d{2})/, '$1-$2 $3 $4')
     return formattedPhoneNumber;
   }
 
-  const formattedPhoneNumber = formatPhoneNumber(contact && contact.phoneNumber);
+  const formattedPhoneNumber = formatPhoneNumber(contactDetails && contactDetails.phoneNumber);
 
 
-  if (!contact) {
+  if (!contactDetails) {
     return (
       <>
       <div className='notFound'>
@@ -79,13 +74,12 @@ const Contact = () => {
           <IoChevronBackOutline className='back-icon' />
           <p>Contacts</p>
         </Link>
-        <Link className='edit-link' to={'/edit-contact'}>Edit</Link>
       </div>
       <div className="contact-lower">
         <div className="circle">
           <p>{arr[0]}</p>  
         </div>
-        <h1 className="contact-name">{contact.firstName + ' ' + contact.lastName}</h1>
+        <h1 className="contact-name">{contactDetails.firstName + ' ' + contactDetails.lastName}</h1>
         <div className="contact-lower-options">
           <div className="contact-box">
             <div className="contact-icon">{<AiFillMessage style={{ fill: '#529F83'}} />}</div>

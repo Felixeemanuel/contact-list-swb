@@ -22,8 +22,7 @@ const AddContact = () => {
         </Link>
         <h1>New Contact</h1>
         <div className='add-contact-link '>
-          {/* <p className='add-contact-done-btn'>Done</p> */}
-        </div>  
+      </div>  
       </div>
       <div className="add-contact-form-wrapper">
         <AddContactForm />

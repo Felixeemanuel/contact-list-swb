@@ -1,5 +1,4 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
 import AnimatedOutlet from './AnimatedOutlet';
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLocation } from 'react-router-dom'
@@ -25,7 +24,6 @@ const RootLayout = () => {
         initial='hidden'
         animate='visible'
         exit='exit'
-        // transition={{ ease: 'easeInOut', duration: 1 }}
       >
         <AnimatedOutlet />
       </motion.div>

@@ -3,12 +3,36 @@ import { AiOutlinePlus } from 'react-icons/ai';
 import { BiSearch } from 'react-icons/bi';
 import SingleContact from '../../Components/SingleContact/SingleContact';
 import { Link } from 'react-router-dom';
-import { useContacts } from '../../Context/ContactsContext';
 import './contacts.css';
+import { useEffect } from 'react';
+import { db } from '../../Components/DB/config';
+import { collection, getDocs } from 'firebase/firestore';
 
 const Contacts = () => {
-  const { contacts } = useContacts();
+  const [contacts, setContacts] = useState([])
   const [searchTerm, setSearchTerm] = useState('');
+
+  useEffect(() => {
+    const fetchContacts = async () => {
+      try {
+        const orderRef = collection(db, 'contacts')
+        const querySnapshot = await getDocs(orderRef)
+  
+        const contactData = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          firstName: doc.data().firstName,
+          lastName: doc.data().lastName,
+          company: doc.data().company,
+          phoneNumber: doc.data().phoneNumber
+        }))
+        setContacts(contactData)
+      } catch (err) {
+        console.log('Error fetching contacts', err)
+      }
+    }
+
+    fetchContacts()
+  }, [])
 
   const filteredContacts = contacts.filter((contact) => {
     const fullName = `${contact.firstName} ${contact.lastName}`.toLowerCase();
