@@ -1,8 +1,8 @@
-# React + Vite
+Felix Edström, Contact list. 2023-10-10
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+To start the project:
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Open terminal in contact-list folder
+Run "npm install"
+Run "npm run dev"
+Instead of using a local JSON file, I took the freedom to use a Firebase DB. Hope you enjoy!
